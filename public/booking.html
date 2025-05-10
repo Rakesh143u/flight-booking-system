@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>VoyageVista – Seat Layout</title>
+  <link rel="stylesheet" href="/css/booking.css" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="logo">VoyageVista</div>
+      <nav>
+        <a href="#" class="nav-item">Dashboard</a>
+        <a href="#" class="nav-item">Tickets</a>
+        <a href="#" class="nav-item">Flights</a>
+        <a href="#" class="nav-item">Seat Layout</a>
+        <a href="#" class="nav-item">Users</a>
+        <a href="#" class="nav-item">Reports</a>
+        <a href="#" class="nav-item">Settings</a>
+      </nav>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <div class="main">
+
+      <!-- HEADER -->
+      <header class="header">
+        <div class="search">
+          <input type="text" placeholder="Search..." />
+        </div>
+        <div class="user">
+          <img src="assets/avatar.jpg" alt="User" class="avatar"/>
+          <span>Charlie Medina</span>
+          <button class="btn-add">Add New</button>
+        </div>
+      </header>
+
+      <!-- CONTENT -->
+      <section class="content">
+
+        <!-- Flight Details + Legend -->
+        <div class="card details-card">
+          <h3>Seat Layout</h3>
+          <div class="flight-info">
+            <div><strong>#ID:</strong> 235</div>
+            <div><strong>Flight:</strong> AA 1201</div>
+            <div><strong>Date:</strong> 11-26-2019</div>
+            <div><strong>Origin:</strong> JFK</div>
+            <div><strong>Dest:</strong> IST</div>
+            <div><strong>Departs:</strong> 03:19 AM</div>
+            <div><strong>Capacity:</strong> 67</div>
+            <div><strong>Reserved:</strong> 34</div>
+            <div><strong>Available:</strong> 33</div>
+          </div>
+          <hr/>
+          <div class="legend">
+            <div><span class="seat-icon available"></span> Available</div>
+            <div><span class="seat-icon occupied"></span> Occupied</div>
+            <div><span class="seat-icon premium"></span> Premium</div>
+            <div><span class="seat-icon blocked">X</span> Blocked</div>
+            <div><span class="seat-icon accessible">♿</span> Accessible</div>
+            <div><span class="seat-icon lavatory">L</span> Lavatory</div>
+          </div>
+        </div>
+
+        <!-- Seat Map Card -->
+        <div class="card seatmap-card">
+          <h3>Boeing 767-300</h3>
+          <div class="seat-map" id="seatMap"></div>
+          <button class="btn-create">Create Seat Alert</button>
+          <button class="btn-create alt">Create Aircraft Change Alert</button>
+        </div>
+
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // Sample seat data
+    const seatConfig = {
+      rows: 10, cols: ['A','B','C','D','E','F','G','H'],
+      occupied: ['1A','2C','3D','4H','5B','7F','8G'],
+      premium: ['1B','1C','1D','1E','1F','1G'],
+      blocked: ['2A','2B'],
+      accessible: ['3A','3H'],
+      lavatory: ['10C','10D']
+    };
+
+    const map = document.getElementById('seatMap');
+
+    for (let r = 1; r <= seatConfig.rows; r++) {
+      seatConfig.cols.forEach(col => {
+        const num = r + col;
+        const div = document.createElement('div');
+        div.classList.add('seat');
+        div.dataset.seat = num;
+        
+        // assign state classes
+        if (seatConfig.occupied.includes(num)) div.classList.add('occupied');
+        else if (seatConfig.premium.includes(num)) div.classList.add('premium');
+        else if (seatConfig.blocked.includes(num)) div.classList.add('blocked');
+        else if (seatConfig.accessible.includes(num)) div.classList.add('accessible');
+        else if (seatConfig.lavatory.includes(num)) div.classList.add('lavatory');
+        else div.classList.add('available');
+
+        div.innerText = col;
+        div.title = `Seat ${num}`;
+        map.appendChild(div);
+      });
+    }
+
+    // Seat click toggles selection if available
+    map.addEventListener('click', e => {
+      const s = e.target;
+      if (!s.classList.contains('seat') || !s.classList.contains('available')) return;
+      s.classList.toggle('selected');
+    });
+  </script>
+</body>
+</html>

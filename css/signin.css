@@ -1,0 +1,174 @@
+/* Full-screen gradient background */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(135deg, #5ee7df 0%, #b490ca 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Container fade-in */
+  .signin-container {
+    animation: fadeIn 0.8s ease-out both;
+  }
+  
+  /* Card with shadow and rounding */
+  .signin-card {
+    background: #fff;
+    padding: 2rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.15);
+    width: 360px;
+    text-align: center;
+    position: relative;
+  }
+  
+  /* Heading animation */
+  .signin-card h2 {
+    margin-bottom: 1.5rem;
+    color: #333;
+    animation: slideDown 0.6s ease-out both;
+  }
+  
+  /* Social buttons base */
+  .social-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 0.75rem;
+  }
+  
+  /* Google button styling */
+  .google-btn {
+    background: #fff;
+    border: 1px solid #ddd;
+    color: #444;
+  }
+  .google-btn i {
+    color: #db4437;
+    margin-right: 8px;
+  }
+  .google-btn:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+  }
+  
+  /* Facebook button styling */
+  .facebook-btn {
+    background: #1877F2;
+    border: none;
+    color: #fff;
+  }
+  .facebook-btn i {
+    margin-right: 8px;
+  }
+  .facebook-btn:hover {
+    background: #166fe5;
+    transform: translateY(-2px);
+  }
+  
+  /* Divider “or” */
+  .divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 1rem 0;
+  }
+  .divider::before,
+  .divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #ddd;
+  }
+  .divider span {
+    margin: 0 0.5rem;
+    color: #888;
+    font-size: 0.9rem;
+  }
+  
+  /* Floating labels */
+  .input-group {
+    position: relative;
+    margin: 1rem 0;
+  }
+  .input-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+  }
+  .input-group input:focus {
+    border-color: #b490ca;
+  }
+  .input-group label {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #aaa;
+    pointer-events: none;
+    transition: all 0.3s;
+  }
+  .input-group input:focus + label,
+  .input-group input:not(:placeholder-shown) + label {
+    top: 0.2rem;
+    left: 8px;
+    font-size: 0.8rem;
+    color: #5ee7df;
+  }
+  
+  /* Primary form button */
+  .btn {
+    margin-top: 1rem;
+    width: 100%;
+    padding: 0.75rem;
+    background: #5ee7df;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+  }
+  .btn:hover {
+    background: #4fc3c7;
+    transform: translateY(-2px);
+  }
+  
+  /* Alt action */
+  .alt-action {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  .alt-action a {
+    color: #b490ca;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .alt-action a:hover {
+    color: #5e3f7c;
+  }
+  
+  /* Keyframes */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  

@@ -1,22 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="../css/style.css" />
-  <title>Flight Booker – Passenger Info</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VoyageVista — Choose Your Flight</title>
+  <link rel="stylesheet" href="/css/bookings.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Passenger Info</h1>
-    <div id="flightDetails"></div>
-    <form id="passengerForm">
-      <input type="text" id="passengerName" placeholder="Full Name" required />
-      <input type="email" id="passengerEmail" placeholder="Email" required />
-      <button type="submit">Continue to Seat Selection</button>
-    </form>
+  <!-- Header -->
+  <header class="page-header">
+    <div class="logo">VoyageVista</div>
+    <nav class="breadcrumb">
+      <a href="index.html">Home</a> › <span>Choose Flight</span>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <div class="content-wrapper">
+    <!-- Sidebar Filters -->
+    <aside class="sidebar">
+      <h3>Filters</h3>
+      <label>Date: <input type="date" id="filterDate" /></label>
+      <label>Price: <input type="range" id="priceRange" min="0" max="1000" /></label>
+      <label>Airline:
+        <select id="filterAirline">
+          <option value="">All</option>
+          <option value="SJ">SkyJet</option>
+          <option value="FF">FlyFast</option>
+        </select>
+      </label>
+      <label>Departure:
+        <select id="filterDepart">
+          <option value="">Any</option>
+          <option value="morning">Morning</option>
+          <option value="afternoon">Afternoon</option>
+          <option value="evening">Evening</option>
+        </select>
+      </label>
+    </aside>
+
+    <!-- Flights List -->
+    <section class="flights-list" id="flightsList">
+      <!-- Flight cards appended here by JS -->
+    </section>
   </div>
-  <script type="module" src="../js/booking.js"></script>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    &copy; 2025 VoyageVista. All rights reserved.
+  </footer>
+
+  <script>
+    // Sample flight data (in production, fetch from /api/flights)
+    const flights = [
+      { id:1, airline:'SJ', number:'SJ100', origin:'JFK', dest:'LAX', depart:'2025-06-10T08:00', arrive:'2025-06-10T11:00', price:199.99, dynamic:true },
+      { id:2, airline:'FF', number:'FF200', origin:'LAX', dest:'ORD', depart:'2025-06-11T13:00', arrive:'2025-06-11T17:00', price:149.50, dynamic:false },
+      // ...
+    ];
+
+    const listEl = document.getElementById('flightsList');
+
+    function renderFlights(data) {
+      listEl.innerHTML = '';
+      data.forEach(f => {
+        const card = document.createElement('div');
+        card.className = 'flight-card';
+        card.innerHTML = `
+          <div class="flight-info">
+            <div><strong>${f.airline} ${f.number}</strong></div>
+            <div>${new Date(f.depart).toLocaleString()} → ${new Date(f.arrive).toLocaleString()}</div>
+            <div>${f.origin} → ${f.dest}</div>
+          </div>
+          <div class="flight-price">
+            $${f.price.toFixed(2)}${f.dynamic ? '<span class="tag">Dynamic</span>' : ''}
+          </div>
+          <button class="btn select-btn" data-id="${f.id}">Select Seat</button>
+        `;
+        listEl.appendChild(card);
+      });
+      // attach click handlers
+      document.querySelectorAll('.select-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          localStorage.setItem('selectedFlight', btn.dataset.id);
+          window.location.href = '/public/booking.html';
+        });
+      });
+    }
+
+    // Initial render
+    renderFlights(flights);
+
+    // Filters (basic example)
+    document.getElementById('filterAirline').addEventListener('change', e => {
+      const val = e.target.value;
+      renderFlights(val ? flights.filter(f=>f.airline===val) : flights);
+    });
+  </script>
 </body>
 </html>

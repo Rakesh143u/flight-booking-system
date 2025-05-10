@@ -1,22 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="../css/style.css" />
-  <title>Flight Booker – Search</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VoyageVista — Flight Booking</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Search Flights</h1>
-    <form id="searchForm">
-      <input type="text" id="from" placeholder="From (Airport Code)" required />
-      <input type="text" id="to" placeholder="To (Airport Code)" required />
-      <input type="date" id="date" required />
-      <button type="submit">Search Flights</button>
-    </form>
+
+  <!-- Pure-CSS modal toggles -->
+  <input type="radio" name="modal" id="none-toggle" hidden checked>
+  <input type="radio" name="modal" id="login-toggle" hidden>
+  <input type="radio" name="modal" id="signup-toggle" hidden>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="container navbar-content">
+      <div class="logo">VoyageVista</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#flights" class="nav-item">Flights</a></li>
+          <li><a href="#deals" class="nav-item">Deals</a></li>
+          <li><a href="#contact" class="nav-item">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="search-bar">
+        <input type="text" placeholder="Search flights..." id="flight-search">
+        <button class="mic-btn" id="mic-btn">🎤</button>
+      </div>
+      <label for="login-toggle" class="btn signin-btn">Login</label>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="flights">
+    <div class="container hero-content">
+      <div style="height:100px;"></div>
+      <h1>Book Your Next Adventure</h1>
+      <p>Find the best deals on flights around the world with VoyageVista.</p>
+      <div class="hero-buttons">
+        <label for="signup-toggle" class="btn get-started-btn">
+          Get Started&nbsp;<span class="arrow">&gt;</span>
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGIN MODAL -->
+  <div class="modal-overlay login-modal">
+    <div class="modal">
+      <label for="none-toggle" class="close-btn">&times;</label>
+      <h2>Login</h2>
+      <form id="loginForm">
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Password" required>
+        <button type="submit" class="btn submit-btn">Login</button>
+      </form>
+      <p>Don't have an account? <label for="signup-toggle">Sign Up</label></p>
+    </div>
   </div>
-  <script type="module" src="../js/search.js"></script>
+
+  <!-- SIGN UP MODAL -->
+  <div class="modal-overlay signup-modal">
+    <div class="modal">
+      <label for="none-toggle" class="close-btn">&times;</label>
+      <h2>Sign Up</h2>
+      <form>
+        <input type="text" placeholder="Full Name" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Password" required>
+        <button type="submit" class="btn submit-btn">Sign Up</button>
+      </form>
+      <p>Already have an account? <label for="login-toggle">Login</label></p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    &copy; 2025 VoyageVista. All rights reserved.
+  </footer>
+
+  <script src="js/navbar.js"></script>
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();              // stop the form’s default POST
+      // TODO: You could verify credentials here via AJAX before redirecting
+  
+      // Redirect to your flight‐selection page:
+      window.location.href = '/public/bookings.html';
+    });
+  </script>
+  
 </body>
 </html>

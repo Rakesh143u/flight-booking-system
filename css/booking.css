@@ -1,0 +1,101 @@
+:root {
+    --bg-dark: #f7f9fc;
+    --card-bg: #fff;
+    --primary: #00d4ff;
+    --text: #333;
+    --muted: #666;
+  }
+  
+  /* LAYOUT */
+  body, html { margin:0; height:100%; font-family:sans-serif; color:var(--text); }
+  .app { display:flex; height:100%; background:var(--bg-dark); }
+  .sidebar {
+    width:220px; background:#fff; padding:20px; box-shadow:2px 0 5px rgba(0,0,0,0.05);
+  }
+  .sidebar .logo { font-size:1.5rem; font-weight:bold; margin-bottom:2rem; }
+  .sidebar .nav-item {
+    display:block; padding:0.5rem 0; color:var(--muted); text-decoration:none;
+  }
+  .sidebar .nav-item:hover, .sidebar .nav-item:nth-child(4) {
+    color:var(--primary);
+  }
+  
+  /* MAIN & HEADER */
+  .main { flex:1; display:flex; flex-direction:column; }
+  .header {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:1rem 2rem; background:#fff; box-shadow:0 2px 4px rgba(0,0,0,0.05);
+  }
+  .search input {
+    padding:0.5rem 1rem; border:1px solid #ddd; border-radius:20px;
+    outline:none; width:200px;
+  }
+  .user { display:flex; align-items:center; gap:1rem; }
+  .avatar { width:32px; height:32px; border-radius:50%; }
+  .btn-add {
+    background:var(--primary); border:none; padding:0.5rem 1rem;
+    border-radius:20px; color:#000; cursor:pointer;
+  }
+  
+  /* CONTENT */
+  .content {
+    flex:1; display:flex; gap:1.5rem; padding:2rem;
+  }
+  .card {
+    background:var(--card-bg); border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05);
+    padding:1.5rem; flex:1; position:relative;
+  }
+  .details-card { max-width:360px; }
+  .details-card h3, .seatmap-card h3 { margin-top:0; }
+  
+  /* FLIGHT INFO & LEGEND */
+  .flight-info div { margin:0.3rem 0; }
+  .legend {
+    display:grid; grid-template-columns:1fr 1fr; gap:0.5rem 1rem; margin-top:1rem;
+  }
+  .legend div { display:flex; align-items:center; gap:0.5rem; }
+  .seat-icon {
+    display:inline-block; width:20px; height:20px; border-radius:4px;
+    text-align:center; line-height:20px; font-size:.75rem; color:#fff;
+  }
+  .available { background:#e0e0e0; color:#333; }
+  .occupied  { background:#333; }
+  .premium   { background:#fbc02d; color:#000; }
+  .blocked   { background:#bf360c; }
+  .accessible{ background:#1976d2; }
+  .lavatory  { background:#616161; }
+  
+  /* SEAT MAP */
+  .seat-map {
+    display:grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap:8px; margin:1rem 0;
+  }
+  .seat {
+    background:#e0e0e0; border-radius:4px;
+    height:40px; display:flex; align-items:center; justify-content:center;
+    cursor:pointer; user-select:none; position:relative;
+    transition:transform .2s;
+  }
+  .seat.available:hover { transform:scale(1.1); }
+  .seat.selected { background:var(--primary); color:#000; }
+  .seat.occupied   { background:#b0bec5; cursor:not-allowed; }
+  .seat.premium    { background:#fbc02d; }
+  .seat.blocked    { background:#bf360c; }
+  .seat.accessible { background:#1976d2; }
+  .seat.lavatory   { background:#616161; }
+  
+  /* ACTION BUTTONS */
+  .btn-create {
+    background: var(--primary); color:#000; border:none;
+    padding:0.6rem 1.2rem; border-radius:20px; cursor:pointer;
+    margin-right:0.5rem;
+  }
+  .btn-create.alt { background:#ffa000; color:#000; }
+  
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .content { flex-direction:column; }
+    .details-card { max-width:none; }
+  }
+  
