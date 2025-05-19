@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flight Booking – Flights</title>
+  <style>
+    body, html {
+      margin: 0; padding: 0;
+      font-family: sans-serif;
+      height: 100%; width: 100%;
+      display: flex; align-items: center; justify-content: center;
+      background: #f0f4f8;
+    }
+    .flights-container {
+      position: relative;
+      width: 360px; height: 640px;
+      overflow: hidden;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+    svg.plane-bg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.15;
+    }
+    .flights-list {
+      position: relative;
+      padding: 24px;
+      max-height: 100%;
+      overflow-y: auto;
+    }
+    .flight-card {
+      background: #ffffffcc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .flight-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.1rem;
+      color: #2d3748;
+    }
+    .flight-info {
+      font-size: 0.9rem;
+      color: #4a5568;
+      margin-bottom: 12px;
+    }
+    .btn-select {
+      display: inline-block;
+      padding: 10px 14px;
+      background: #0077cc;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      transition: background 0.2s;
+    }
+    .btn-select:hover {
+      background: #005fa3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="flights-container">
+    <!-- faint plane background -->
+    <svg class="plane-bg" viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg">
+      <!-- simple plane silhouette -->
+      <path d="M320 40 L360 240 L320 260 L300 200 L200 220 L180 200 L260 180 L140 160 L320 40 Z" fill="#000"/>
+    </svg>
+
+    <div class="flights-list">
+      <h2>Available Flights</h2>
+
+      <div class="flight-card">
+        <h3>Flight A123</h3>
+        <div class="flight-info">
+          🕗 08:00 AM &nbsp; • &nbsp; NYC → LAX &nbsp; • &nbsp; $150
+        </div>
+        <a href="#" class="btn-select" data-next="seat-selection">Select Seats</a>
+      </div>
+
+      <div class="flight-card">
+        <h3>Flight B456</h3>
+        <div class="flight-info">
+          🕧 12:30 PM &nbsp; • &nbsp; NYC → LAX &nbsp; • &nbsp; $175
+        </div>
+        <a href="#" class="btn-select" data-next="seat-selection">Select Seats</a>
+      </div>
+
+      <div class="flight-card">
+        <h3>Flight C789</h3>
+        <div class="flight-info">
+          🕒 03:45 PM &nbsp; • &nbsp; NYC → LAX &nbsp; • &nbsp; $190
+        </div>
+        <a href="#" class="btn-select" data-next="seat-selection">Select Seats</a>
+      </div>
+      
+      <!-- add more cards as needed -->
+    </div>
+  </div>
+
+  <script>
+    // Example: hook into your transition logic
+    document.querySelectorAll('.btn-select').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        const next = btn.dataset.next;
+        // TODO: trigger your plane-zoom or JS transition to “seat-selection”
+        console.log('Go to:', next);
+      });
+    });
+  </script>
+
+</body>
+</html>
